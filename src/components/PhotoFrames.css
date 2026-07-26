@@ -2,6 +2,7 @@
   display: grid;
   gap: 0.85rem;
   width: 100%;
+  overflow: hidden;
 }
 
 .photo-frames__item {
@@ -12,6 +13,7 @@
   border: 1px solid var(--frame-edge);
   box-shadow: var(--shadow);
   overflow: hidden;
+  min-width: 0;
 }
 
 .photo-frames__button {
@@ -120,6 +122,14 @@
 }
 
 @media (max-width: 720px) {
+  .photo-frames {
+    gap: 0.65rem;
+  }
+
+  .photo-frames__item {
+    padding: 0.4rem 0.4rem 1rem;
+  }
+
   .photo-frames--3 {
     grid-template-columns: 1fr 1fr;
   }
@@ -127,6 +137,10 @@
   .photo-frames--3 .photo-frames__item--1 {
     grid-column: 1 / -1;
     grid-row: auto;
+  }
+
+  .photo-frames--3 .photo-frames__item--1 img {
+    aspect-ratio: 4 / 5;
   }
 
   .photo-frames--5 {
@@ -148,21 +162,32 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 480px) {
+  /* Keep pairs side-by-side on iPhone — scrapbook feel, less endless scroll */
   .photo-frames--2 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .photo-frames--2 .photo-frames__item--1,
   .photo-frames--2 .photo-frames__item--2 {
+    transform: none;
     margin-top: 0;
   }
 
   .photo-frames--4 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .photo-frames--4 .photo-frames__item--2,
   .photo-frames--4 .photo-frames__item--4 {
     margin-top: 0;
+  }
+
+  .photo-frames--1 {
+    max-width: 100%;
+  }
+
+  .photo-frames img {
+    aspect-ratio: 3 / 4;
   }
 }

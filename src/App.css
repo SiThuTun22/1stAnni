@@ -1,5 +1,5 @@
 .site-footer {
-  padding: 2.5rem 1.5rem 3rem;
+  padding: 2.5rem 1.5rem calc(3rem + env(safe-area-inset-bottom));
   text-align: center;
   color: var(--ink-soft);
   border-top: 1px solid rgba(168, 93, 104, 0.15);
@@ -8,13 +8,16 @@
 .site-footer__brand {
   margin: 0;
   font-family: var(--font-script);
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 6vw, 2rem);
   color: var(--rose-deep);
   line-height: 1;
 }
 
 .site-footer p:last-child {
-  margin: 0.55rem 0 0;
-  font-size: 0.92rem;
+  margin: 0.55rem auto 0;
+  max-width: 22rem;
+  font-size: 0.9rem;
   letter-spacing: 0.04em;
+  line-height: 1.5;
+  padding-inline: 0.5rem;
 }

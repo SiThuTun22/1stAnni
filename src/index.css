@@ -68,8 +68,16 @@ textarea {
   font: inherit;
 }
 
+/* Prevent iOS zoom-on-focus (needs >= 16px) */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
 button {
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 img {
@@ -88,6 +96,8 @@ a {
 
 .app {
   min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: clip;
 }
 
 .section-shell {
@@ -97,6 +107,13 @@ a {
 
 @media (max-width: 640px) {
   .section-shell {
-    width: min(1120px, calc(100% - 1.5rem));
+    width: min(1120px, calc(100% - 1.25rem));
+  }
+}
+
+/* iPhone / small phones */
+@media (max-width: 480px) {
+  .section-shell {
+    width: min(1120px, calc(100% - 1rem));
   }
 }
