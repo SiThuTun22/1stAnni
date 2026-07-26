@@ -192,11 +192,18 @@ export function AddMemoryModal({
         })),
       })
       onClose()
-    } catch {
+    } catch (err) {
+      console.error(err)
+      const detail =
+        err && typeof err === 'object' && 'message' in err
+          ? String((err as { message: unknown }).message)
+          : ''
       setError(
-        editing
-          ? 'Could not update this memory. Please try again.'
-          : 'Could not save this memory. Please try again.',
+        detail
+          ? `Could not save: ${detail}`
+          : editing
+            ? 'Could not update this memory. Please try again.'
+            : 'Could not save this memory. Please try again.',
       )
     } finally {
       setSaving(false)

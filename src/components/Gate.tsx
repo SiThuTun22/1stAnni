@@ -7,8 +7,26 @@ type GateProps = {
   onUnlock: () => void
 }
 
-/** Normalize to DD-MM-YYYY so 26-7-2025 and 26-07-2025 both work */
+/** Keep only digits, max 8 (DDMMYYYY) */
+function digitsOnly(value: string) {
+  return value.replace(/\D/g, '').slice(0, 8)
+}
+
+/** Show DD-MM-YYYY while typing on a number pad (no dash key needed) */
+function formatDateInput(value: string) {
+  const digits = digitsOnly(value)
+  if (digits.length <= 2) return digits
+  if (digits.length <= 4) return `${digits.slice(0, 2)}-${digits.slice(2)}`
+  return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}`
+}
+
+/** Normalize to DD-MM-YYYY — accepts 26-07-2025, 26-7-2025, or 26072025 */
 function normalizeDate(value: string) {
+  const digits = digitsOnly(value)
+  if (digits.length === 8) {
+    return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}`
+  }
+
   const cleaned = value.trim().replace(/[./]/g, '-')
   const match = cleaned.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/)
   if (!match) return null
@@ -69,6 +87,10 @@ export function Gate({ onUnlock }: GateProps) {
           </label>
           <p className="gate__format">
             Format: <strong>{GATE.formatHint}</strong>
+            <span className="gate__format-note">
+              {' '}
+              — on phone, just type the numbers
+            </span>
           </p>
           <input
             id={inputId}
@@ -76,10 +98,11 @@ export function Gate({ onUnlock }: GateProps) {
             type="text"
             inputMode="numeric"
             autoComplete="off"
+            enterKeyHint="go"
             placeholder={GATE.formatHint}
             value={value}
             onChange={(e) => {
-              setValue(e.target.value)
+              setValue(formatDateInput(e.target.value))
               if (error) setError('')
             }}
             aria-invalid={Boolean(error)}
