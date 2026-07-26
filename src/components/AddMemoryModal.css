@@ -1,0 +1,228 @@
+.memory-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.memory-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(58, 47, 50, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.memory-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  max-height: min(92vh, 900px);
+  overflow: auto;
+  background:
+    linear-gradient(180deg, #fffaf9, #f7eef0);
+  border: 1px solid rgba(168, 93, 104, 0.22);
+  box-shadow: 0 30px 80px rgba(58, 47, 50, 0.28);
+  border-radius: 6px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.memory-modal__header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+}
+
+.memory-modal__header p {
+  margin: 0.4rem 0 0;
+  color: var(--ink-soft);
+}
+
+.memory-modal__form {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field span {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(168, 93, 104, 0.28);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.85rem;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.slots__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.slots__head p {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+
+.slots__actions button {
+  appearance: none;
+  border: 1px solid rgba(168, 93, 104, 0.35);
+  background: #fff8f7;
+  color: var(--ink);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius);
+}
+
+.slots__actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.slots__grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.slots__grid--1 {
+  grid-template-columns: 1fr;
+}
+
+.slots__grid--2,
+.slots__grid--4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.slots__grid--3,
+.slots__grid--5 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.slot {
+  position: relative;
+  border: 1px dashed rgba(168, 93, 104, 0.4);
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 150px;
+}
+
+.slot__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slot img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.slot__empty {
+  width: 100%;
+  min-height: 150px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-content: center;
+  gap: 0.2rem;
+  color: var(--ink-soft);
+}
+
+.slot__empty span {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.slot__empty small {
+  font-size: 0.85rem;
+}
+
+.slot__tools {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.45rem;
+  background: rgba(255, 248, 247, 0.92);
+  border-top: 1px solid rgba(168, 93, 104, 0.15);
+}
+
+.slot__tools button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  padding: 0.15rem 0.2rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.memory-modal__error {
+  margin: 0;
+  color: var(--rose-deep);
+  font-size: 0.95rem;
+}
+
+.memory-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.btn {
+  appearance: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.15rem;
+  border: 1px solid transparent;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(168, 93, 104, 0.3);
+  color: var(--ink-soft);
+}
+
+.btn--primary {
+  background: linear-gradient(180deg, #e8a0ae, #c97b84);
+  color: #fffaf9;
+  border-color: transparent;
+}
+
+.btn--primary:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .slots__grid--2,
+  .slots__grid--3,
+  .slots__grid--4,
+  .slots__grid--5 {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,20 @@
+.site-footer {
+  padding: 2.5rem 1.5rem 3rem;
+  text-align: center;
+  color: var(--ink-soft);
+  border-top: 1px solid rgba(168, 93, 104, 0.15);
+}
+
+.site-footer__brand {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--rose-deep);
+  line-height: 1;
+}
+
+.site-footer p:last-child {
+  margin: 0.55rem 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}

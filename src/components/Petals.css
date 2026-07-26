@@ -1,0 +1,16 @@
+.petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  border-radius: 60% 40% 60% 40%;
+  background: linear-gradient(135deg, #f7d6dc, #e8a0ae 55%, #c97b84);
+  opacity: 0.7;
+  filter: blur(0.2px);
+}
